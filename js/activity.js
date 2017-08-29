@@ -18,19 +18,20 @@ let Activity = (function(){
     //render
     var _render = () => {
         $activityList.empty()
-        activities.forEach(v => {
-            $activityList.append($template.clone().text(v));
-        });
+        for( let {activity:a, time:t} of activities){
+            $activityList.append($template.clone().text(`${t}: I am doing ${a}`));
+        }
     }
-    
+
     //methods
     function addActivity(v) {
-        const val = (typeof v == "string")?v:$input.val();
-        activities.push(val);
+        const activity = (typeof v == "string")?v:$input.val();
+        const time = (new Date()).toISOString();
+        activities.push({activity, time});
         _render();
     }
 
     return {
-        addActivity,
+        addActivity
     }
 })();
