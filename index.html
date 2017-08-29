@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-  </head>
-  <body>
-    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="jumbotron jumbotron-fluid jumbotron-custom">
+            <div class="container">
+                <h1 class="display-3">Activity Tracker</h1>
+                <p class="lead">Add What you do! It's that simple</p>
+                <div class="input-group">
+                    <span class="input-group-addon">I am </span>
+                    <input type="text" class="form-control activity-text" placeholder="Swimming, Walking, Reading">
+                    <span class="input-group-btn">
+                    <button class="btn btn-secondary go-btn" type="button">Go!</button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <h2>Activities</h2>
+                    <ul class="activity-list">
+                        
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" placeholder="search">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Load Babel -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  </body>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="js/pubsub.js" type="text/babel"></script>
+    <script src="js/activity.js" type="text/babel"></script>
+    <script src='js/search.js' type="text/babel"></script>
+    <script src="js/stats.js" type="text/babel"></script>
+</body>
+
 </html>
