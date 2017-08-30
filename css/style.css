@@ -4,3 +4,8 @@
 .jumbotron-custom {
     background: #dcd3d9 ;
 }
+.fa.fa-times-circle{
+    cursor: pointer;
+    padding-left: 10px;
+
+}
