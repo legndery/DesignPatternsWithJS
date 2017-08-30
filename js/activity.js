@@ -9,11 +9,13 @@ let Activity = (function(){
     const $app = $('#app')
     const $input = $app.find('input.activity-text');
     const $goButton = $app.find('button.go-btn');
+    // const $closeButton = $app.find('i.fa.fa-times-circle')
     const $activityList = $app.find('ul.activity-list');
     const template = $app.find('#list-item-template').html();
 
     //bindUI
     $goButton.on('click', addActivity)
+    $activityList.on('click', 'i.fa.fa-times-circle', removeActivity)
     _render()
 
 
@@ -26,6 +28,7 @@ let Activity = (function(){
     }
     
     const _getDate = (d)=>{
+
         function pad(number) {
             if (number < 10) {
               return '0' + number;
@@ -51,10 +54,12 @@ let Activity = (function(){
         if(typeof e == "number"){
             i = e;
         }else{
-            $remove = $(e.target).closest('li');
+            const $remove = $(e.target).closest('li');
+            
             i = $activityList.find('li').index($remove);
+            console.log(i);
         }
-        activities.slice(i,1);
+        activities.splice(i,1);
         _render();
 
     }
