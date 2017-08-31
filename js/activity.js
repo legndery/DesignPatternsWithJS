@@ -1,30 +1,42 @@
 
 let Activity = (function(){
 
-    let activities= [{"time":"2017-08-29 17:08","activity":"afafaf"}];
-    
+    let activities= [{"time":"2017-08-29 17:08","activity":"afafaf","display":true}];
+    let showing = activities.length;
     //bind ui events
 
     //dom cache
     const $app = $('#app')
     const $input = $app.find('input.activity-text');
     const $goButton = $app.find('button.go-btn');
-    // const $closeButton = $app.find('i.fa.fa-times-circle')
+    const $listTitle = $app.find('.list-title span')
     const $activityList = $app.find('ul.activity-list');
+    const $searchInput = $app.find('.search-text');
     const template = $app.find('#list-item-template').html();
 
     //bindUI
     $goButton.on('click', addActivity)
     $activityList.on('click', 'i.fa.fa-times-circle', removeActivity)
+    $searchInput.on('input', search);
     _render()
 
 
     //render
     function _render(){
-        $activityList.empty()
-        for( let {activity:a, time:t} of activities){
-            $activityList.append($(template).clone().prepend(`${t}: I am ${a}`));
+        $activityList.empty();
+        showing = 0;
+        for( let {activity:a, time:t, display} of activities){
+            if(display){
+                const $template = $(template).clone();
+                $template.find('.date').text(t);
+                $template.find('.text').text(`I am ${a}`);
+                $activityList.append($template);
+                showing++;
+            }
+                
         }
+        PubSub.publish("activityChanged", activities.length);
+        $listTitle.text(` (${showing} of ${activities.length})`);
     }
     
     const _getDate = (d)=>{
@@ -45,8 +57,10 @@ let Activity = (function(){
     function addActivity(e) {
         const activity = (typeof e == "string")?e:$input.val();
         const time= _getDate(new Date());
-                
-        activities.push({activity, time});
+        const display = true;
+
+        activities.push({activity, time, display});
+        $input.val('');
         _render();
     }
     function removeActivity(e){
@@ -61,9 +75,21 @@ let Activity = (function(){
         }
         activities.splice(i,1);
         _render();
-
+    }
+    function search(e){
+        const q = (typeof e == "string")?e:$searchInput.val();
+        for(let i =0;i<activities.length;i++){
+            if(activities[i].activity.indexOf(q)<0){
+                activities[i].display = false;
+            }else{
+                activities[i].display = true;
+            }
+        }
+        _render();
     }
     return {
-        addActivity
+        addActivity,
+        removeActivity,
+        search
     }
 })();

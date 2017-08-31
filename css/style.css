@@ -7,5 +7,45 @@
 .fa.fa-times-circle{
     cursor: pointer;
     padding-left: 10px;
+    float: right;
+    padding-top: 4px;
+}
 
+.activity-list {
+    list-style: none;
+    padding: 0;
+}
+.activity-list .item {
+    padding: 2px 10px 2px 8px;
+    /* padding: 2px 10px 20px 8px; */
+    border-left: 4px solid #715166;
+    border-bottom: 1px solid #715166;
+    display: inline-block;
+    background: #dcd3d9;
+    margin: 5px;
+    /* min-height: 80px; */
+    min-width: 175px;
+    /* max-width: 30%; */
+    /* float: left; */
+    border-radius: 5px;
+    
+}
+.list-title span {
+    font-size: 20px;
+    line-height: 30px;
+    vertical-align: bottom;
+}
+.activity-list .item .date {
+    font-weight: 500;
+    font-size: 12px;
+    border-bottom: 1px solid #715166;
+}
+.activity-list .item .text {
+    display: block;
+    font-size: 18px;
+}
+.activity-list .item .text::before {
+    content: "";
+    width: 20px;
+    display: inline-block;
 }
