@@ -1,7 +1,7 @@
 
 let Activity = (function(){
 
-    let activities= [{"time":"2017-08-29 17:08","activity":"afafaf","display":true}];
+    let activities= [];
     let showing = activities.length;
     //bind ui events
 
